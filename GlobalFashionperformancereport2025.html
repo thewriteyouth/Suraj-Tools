@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FY2025 Global Fashion Intelligence Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0F1117; --body:#1E2230; --mid:#5A6072; --dim:#8A8FA0; --rule:#D4D8E3; --bg:#F9FAFB; --white:#FFFFFF; --paper:#FFFEF9;
+  --gold:#B07D1A; --gold-lt:#FDF6E3; --gold-dk:#8A600F;
+  --grn:#0B6B3C; --grn-lt:#E8F7EE; --grn-md:#16A057;
+  --red:#C0181E; --red-lt:#FEF0F0; --red-md:#DC2626;
+  --amb:#8B5C00; --amb-lt:#FEF3CD;
+  --us:#1840A8; --us-lt:#EEF2FB;
+  --eu:#0F6B45; --eu-lt:#EAF7F1;
+  --ca:#9B3410; --ca-lt:#FEF1EB;
+  --jp:#6B1FAD; --jp-lt:#F5EEFB;
+  --serif:'Fraunces',serif;
+  --sans:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+  --col-w:220px;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--body);font-size:13.5px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* ─── PRINT ─── */
+@media print{
+  .app-shell{flex-direction:column}
+  .left-rail{display:none!important}
+  .page-wrap{padding:0}
+  body{font-size:11px;background:#fff;color:#000}
+  .section{page-break-inside:avoid}
+  canvas{max-height:220px!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+/* ─── SHELL ─── */
+.app-shell{display:flex;min-height:100vh}
+
+/* ─── LEFT RAIL ─── */
+.left-rail{
+  width:var(--col-w);min-height:100vh;position:fixed;top:0;left:0;
+  background:var(--ink);display:flex;flex-direction:column;z-index:200;
+  border-right:3px solid var(--gold);
+}
+.rail-top{padding:28px 20px 24px;border-bottom:1px solid rgba(255,255,255,.08)}
+.rail-logo-line{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.rail-title{font-family:var(--serif);font-size:18px;font-weight:900;color:#fff;line-height:1.2}
+.rail-date{font-size:10px;color:rgba(255,255,255,.3);margin-top:6px;letter-spacing:.5px}
+.rail-nav{flex:1;padding:20px 0;overflow-y:auto}
+.rail-section{margin-bottom:4px}
+.rail-section-hd{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.25);padding:10px 20px 4px}
+.rail-link{display:flex;align-items:center;gap:10px;padding:9px 20px;color:rgba(255,255,255,.5);font-size:12px;font-weight:500;text-decoration:none;border-left:3px solid transparent;transition:.15s;cursor:pointer}
+.rail-link:hover{color:#fff;background:rgba(255,255,255,.04)}
+.rail-link.on{color:#fff;border-left-color:var(--gold);background:rgba(183,125,26,.1)}
+.rail-link .pip{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.pip-us{background:var(--us)}.pip-eu{background:var(--eu)}.pip-ca{background:var(--ca)}.pip-jp{background:var(--jp)}.pip-g{background:var(--gold)}.pip-r{background:var(--dim)}
+.rail-bottom{padding:16px 20px;border-top:1px solid rgba(255,255,255,.08)}
+.btn-pdf{width:100%;background:var(--gold);color:var(--ink);border:none;padding:10px 0;border-radius:4px;font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer}
+
+/* ─── MAIN ─── */
+.page-wrap{margin-left:var(--col-w);padding:0}
+
+/* ─── MASTHEAD ─── */
+.masthead{background:var(--ink);padding:0 56px;position:relative;overflow:hidden}
+.masthead::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold) 0%,#D4A843 40%,var(--gold) 100%)}
+.mh-inner{max-width:1100px;margin:0 auto;padding:52px 0 44px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+.mh-badge{font-size:9.5px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.mh-badge::before{content:'';width:24px;height:1px;background:var(--gold);display:block}
+.mh-h1{font-family:var(--serif);font-size:58px;font-weight:900;color:#fff;line-height:.98;letter-spacing:-1px;margin-bottom:14px}
+.mh-h1 span{color:var(--gold)}
+.mh-desc{font-size:14px;color:rgba(255,255,255,.45);max-width:600px;line-height:1.6;font-weight:300}
+.mh-stats{display:flex;flex-direction:column;gap:0;border:1px solid rgba(255,255,255,.1);border-radius:6px;overflow:hidden;min-width:200px;align-self:center}
+.mh-stat{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.07)}
+.mh-stat:last-child{border:none}
+.mh-sv{font-family:var(--mono);font-size:26px;font-weight:500;color:var(--gold);line-height:1}
+.mh-sl{font-size:9.5px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.3);margin-top:3px}
+.mh-tags{margin-top:20px;display:flex;gap:8px;flex-wrap:wrap}
+.mh-tag{font-size:10px;color:rgba(255,255,255,.25);padding:3px 10px;border:1px solid rgba(255,255,255,.08);border-radius:100px}
+
+/* ─── CONTENT SECTIONS ─── */
+.section{padding:40px 56px;max-width:none;border-bottom:1px solid var(--rule)}
+.section:last-child{border:none}
+.section-inner{max-width:1100px;margin:0 auto}
+.sec-kicker{font-size:9.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sec-kicker::before{content:'';width:18px;height:1.5px;background:var(--gold);display:block}
+.sec-title{font-family:var(--serif);font-size:32px;font-weight:900;color:var(--ink);line-height:1.1;margin-bottom:6px}
+.sec-sub{font-size:13px;color:var(--dim);max-width:640px;margin-bottom:28px}
+
+/* ─── REGION HEADER ─── */
+.rh{border-radius:8px;padding:22px 28px;margin-bottom:22px;display:flex;align-items:center;gap:20px;justify-content:space-between;flex-wrap:wrap}
+.rh-left{display:flex;align-items:center;gap:14px}
+.rh-flag{font-size:34px;line-height:1}
+.rh-name{font-family:var(--serif);font-size:24px;font-weight:900;line-height:1.1}
+.rh-sub{font-size:11px;margin-top:3px;opacity:.6}
+.rh-right{display:flex;gap:20px;flex-wrap:wrap}
+.rh-kpi .rv{font-family:var(--mono);font-size:20px;font-weight:500;line-height:1}
+.rh-kpi .rl{font-size:9.5px;text-transform:uppercase;letter-spacing:.8px;opacity:.55;margin-top:3px}
+.rh-us{background:var(--us-lt);color:var(--us)}.rh-eu{background:var(--eu-lt);color:var(--eu)}.rh-ca{background:var(--ca-lt);color:var(--ca)}.rh-jp{background:var(--jp-lt);color:var(--jp)}
+
+/* ─── CALLOUT GRID ─── */
+.callout-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.callout{background:var(--white);border-radius:6px;padding:16px 18px;border-top:3px solid;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.c-blue{border-color:var(--us)}.c-green{border-color:var(--grn-md)}.c-gold{border-color:var(--gold)}.c-red{border-color:var(--red-md)}
+.c-tag{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:7px}
+.c-blue .c-tag{color:var(--us)}.c-green .c-tag{color:var(--grn)}.c-gold .c-tag{color:var(--gold-dk)}.c-red .c-tag{color:var(--red)}
+.callout p{font-size:12.5px;color:var(--mid);line-height:1.65}
+.callout p strong{color:var(--body);font-weight:600}
+
+/* ─── KPI STRIP ─── */
+.kpi-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.kpi-box{background:var(--white);border-radius:6px;padding:20px 22px;box-shadow:0 1px 6px rgba(0,0,0,.05);border:1px solid var(--rule);position:relative;overflow:hidden}
+.kpi-box::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-g::after{background:var(--gold)}.kpi-gr::after{background:var(--grn-md)}.kpi-r::after{background:var(--red-md)}.kpi-b::after{background:var(--us)}
+.kpi-val{font-family:var(--mono);font-size:30px;font-weight:500;color:var(--ink);line-height:1;margin-bottom:4px}
+.kpi-lbl{font-size:10.5px;color:var(--dim);letter-spacing:.3px}
+.kpi-note{font-size:11px;color:var(--mid);margin-top:4px}
+
+/* ─── CHART PANELS ─── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.panel{background:var(--white);border-radius:8px;padding:22px 24px;box-shadow:0 1px 8px rgba(0,0,0,.05);border:1px solid var(--rule)}
+.panel-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px;letter-spacing:.1px}
+.panel-sub{font-size:11px;color:var(--dim);margin-bottom:16px}
+
+/* ─── HEATMAP ─── */
+.hm-scroll{overflow-x:auto;border-radius:6px;border:1px solid var(--rule);background:var(--bg)}
+.hm-tbl{width:100%;border-collapse:separate;border-spacing:3px;padding:5px;background:#E5E8F0}
+.hm-tbl th{background:var(--ink);color:rgba(255,255,255,.6);font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:8px 12px;text-align:center;border-radius:3px;white-space:nowrap}
+.hm-tbl th:first-child{text-align:left;min-width:160px}
+.hm-tbl td{padding:8px 10px;text-align:center;border-radius:3px;font-family:var(--mono);font-weight:600;font-size:12px;white-space:nowrap}
+.hm-tbl td:first-child{background:var(--white)!important;text-align:left;font-family:var(--sans);font-weight:600;font-size:12.5px;color:var(--ink);padding-left:12px}
+.hm-tbl td:first-child small{display:block;font-size:10px;color:var(--dim);font-weight:400;margin-top:1px}
+.hg5{background:#14532D;color:#BBF7D0}.hg4{background:#166534;color:#fff}.hg3{background:#15803D;color:#fff}.hg2{background:#4ADE80;color:#14532D}.hg1{background:#BBF7D0;color:#166534}
+.hn{background:#F1F5F9;color:#94A3B8}
+.hr1{background:#FEE2E2;color:#991B1B}.hr2{background:#FCA5A5;color:#7F1D1D}.hr3{background:#F87171;color:#fff}.hr4{background:#DC2626;color:#fff}.hr5{background:#991B1B;color:#fff}
+.htraj{text-align:left!important;font-family:var(--sans)!important;font-size:11.5px!important;font-weight:700!important;padding-left:10px!important;min-width:110px}
+.ta{background:#E8F7EE!important;color:#166534}.ti{background:#EFF6FF!important;color:#1D4ED8}.ts{background:#FEF9C3!important;color:#713F12}.tso{background:#FFF7ED!important;color:#9A3412}.td{background:#FEF2F2!important;color:#991B1B}
+
+/* ─── DATA TABLE ─── */
+.dt{width:100%;border-collapse:collapse}
+.dt thead th{background:var(--ink);color:rgba(255,255,255,.6);font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:10px 12px;text-align:right;border-bottom:2px solid var(--gold);white-space:nowrap}
+.dt thead th:first-child{text-align:left}
+.dt tbody td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:12px;color:var(--mid)}
+.dt tbody td:first-child{text-align:left;font-family:var(--sans);font-weight:600;font-size:13px;color:var(--ink)}
+.dt tbody tr:hover td{background:var(--gold-lt)}
+.dt tfoot td{background:var(--bg);font-family:var(--mono);font-size:11px;padding:8px 12px;text-align:right;color:var(--dim);border-top:1px solid var(--rule)}
+.vup{color:var(--grn)!important;font-weight:600}.vdn{color:var(--red)!important;font-weight:600}.vfl{color:var(--amb)!important;font-weight:600}.vna{color:var(--dim)!important}
+.rg-chip{font-size:9px;font-weight:700;padding:2px 6px;border-radius:3px;letter-spacing:.5px;font-family:var(--mono);vertical-align:middle;margin-left:4px}
+.chip-US{background:var(--us-lt);color:var(--us)}.chip-EU{background:var(--eu-lt);color:var(--eu)}.chip-CA{background:var(--ca-lt);color:var(--ca)}.chip-JP{background:var(--jp-lt);color:var(--jp)}
+.inv-lean{background:var(--grn-lt);color:var(--grn);padding:2px 7px;border-radius:3px;font-size:10.5px;font-weight:700;font-family:var(--sans)}
+.inv-bld{background:var(--red-lt);color:var(--red);padding:2px 7px;border-radius:3px;font-size:10.5px;font-weight:700;font-family:var(--sans)}
+
+/* ─── PRODUCT TABLE ─── */
+.ptbl{width:100%;border-collapse:collapse}
+.ptbl thead th{background:var(--ink);color:rgba(255,255,255,.6);font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:9px 14px;text-align:left;white-space:nowrap;border-bottom:2px solid var(--gold)}
+.ptbl td{padding:9px 14px;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--mid);font-size:12.5px}
+.ptbl tr:hover td{background:#FFFEF0}
+.ptbl .brow td{background:#F8F9FC;font-family:var(--sans);font-weight:700;font-size:13px;color:var(--ink);padding:8px 14px;border-bottom:1px solid var(--rule);border-top:1px solid var(--rule)}
+.ptbl .rgrow td{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px}
+.qbadge{font-family:var(--mono);font-weight:600;font-size:11.5px;padding:2px 8px;border-radius:3px;background:var(--gold-lt);color:var(--gold-dk);white-space:nowrap;display:inline-block}
+.hw{color:var(--red);font-size:12px}
+.hw::before{content:'↓ ';font-weight:700}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1000px){
+  .callout-row,.kpi-strip,.g4{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:1fr 1fr}
+  .mh-inner{grid-template-columns:1fr}
+  .mh-stats{display:none}
+}
+@media(max-width:768px){
+  .left-rail{display:none}
+  .page-wrap{margin-left:0}
+  .section{padding:32px 20px}
+  .masthead{padding:0 20px}
+  .mh-h1{font-size:36px}
+  .callout-row,.kpi-strip,.g2,.g3,.g4{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app-shell">
+
+<!-- ─── LEFT RAIL ─── -->
+<aside class="left-rail">
+  <div class="rail-top">
+    <div class="rail-logo-line">FFA · Annual Report</div>
+    <div class="rail-title">FY2025 Fashion Intelligence</div>
+    <div class="rail-date">Published March 2026</div>
+  </div>
+  <nav class="rail-nav">
+    <div class="rail-section">
+      <div class="rail-section-hd">Overview</div>
+      <a class="rail-link on" href="#overview"><span class="pip pip-g"></span>Global Summary</a>
+      <a class="rail-link" href="#heatmap"><span class="pip pip-g"></span>Growth Heatmap</a>
+    </div>
+    <div class="rail-section">
+      <div class="rail-section-hd">Regions</div>
+      <a class="rail-link" href="#us"><span class="pip pip-us"></span>United States</a>
+      <a class="rail-link" href="#eu"><span class="pip pip-eu"></span>Europe</a>
+      <a class="rail-link" href="#ca"><span class="pip pip-ca"></span>Canada</a>
+      <a class="rail-link" href="#jp"><span class="pip pip-jp"></span>Japan</a>
+    </div>
+    <div class="rail-section">
+      <div class="rail-section-hd">Analysis</div>
+      <a class="rail-link" href="#balance"><span class="pip pip-r"></span>Inventory & Debt</a>
+      <a class="rail-link" href="#products"><span class="pip pip-g"></span>What Sold</a>
+    </div>
+  </nav>
+  <div class="rail-bottom">
+    <button class="btn-pdf" onclick="window.print()">↓ Export PDF</button>
+  </div>
+</aside>
+
+<!-- ─── PAGE ─── -->
+<div class="page-wrap">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="mh-inner">
+    <div>
+      <div class="mh-badge">Fashion Financial Analytics · FY2025 Annual Intelligence Report</div>
+      <h1 class="mh-h1">Global Fashion<br><span>Performance Report</span></h1>
+      <p class="mh-desc">Revenue, income, inventory & debt analysis across 28 publicly-listed fashion and sportswear companies spanning four regions — United States, Europe, Canada, Japan. Q1 through Q4 quarterly progression with product-level intelligence.</p>
+      <div class="mh-tags">
+        <span class="mh-tag">USD Billions · EUR→1.09 · JPY→0.0067 · CAD→0.74</span>
+        <span class="mh-tag">Source: Earnings reports, SEC filings, investor presentations</span>
+        <span class="mh-tag">Published March 2026</span>
+      </div>
+    </div>
+    <div class="mh-stats">
+      <div class="mh-stat"><div class="mh-sv">28</div><div class="mh-sl">Brands Tracked</div></div>
+      <div class="mh-stat"><div class="mh-sv" id="mh-w">—</div><div class="mh-sl">In Growth</div></div>
+      <div class="mh-stat"><div class="mh-sv" id="mh-l">—</div><div class="mh-sl">Declining</div></div>
+      <div class="mh-stat"><div class="mh-sv">4</div><div class="mh-sl">Regions</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ OVERVIEW ════ -->
+<section class="section" id="overview">
+<div class="section-inner">
+  <div class="sec-kicker">Global Overview</div>
+  <h2 class="sec-title">FY2025 at a Glance</h2>
+  <p class="sec-sub">A year of extreme divergence — premium lifestyle and fast fashion accelerated while legacy sportswear giants reset and department stores continued structural decline.</p>
+
+  <div class="kpi-strip" id="kpi-strip"></div>
+
+  <div class="g2">
+    <div class="panel">
+      <div class="panel-title">Top 12 Brands · FY2025 Revenue ($B)</div>
+      <div class="panel-sub">Excludes Walmart for scale. Colour by region: blue=US · green=EU · orange=CA · purple=JP</div>
+      <div style="position:relative;height:220px;width:100%"><canvas id="c-top12" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">FY2025 YoY Revenue Growth (%) — All Brands with Full-Year Data</div>
+      <div class="panel-sub">Green = growth · Red = decline · Sorted high to low</div>
+      <div style="position:relative;height:220px;width:100%"><canvas id="c-yoy-all" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-bottom:16px">
+    <div class="panel-title">Revenue vs Net Income · FY2025 ($B) — Reporting Brands</div>
+    <div class="panel-sub">Blue bars = FY25 revenue · Grey = FY24 revenue · Gold line = FY25 net income. Shows which brands convert revenue into profit.</div>
+    <div style="position:relative;height:190px;width:100%"><canvas id="c-rev-vs-inc" style="position:absolute;inset:0" height="170"></canvas></div>
+  </div>
+</div>
+</section>
+
+<!-- ════ HEATMAP ════ -->
+<section class="section" id="heatmap">
+<div class="section-inner">
+  <div class="sec-kicker">Revenue Growth · All 28 Brands</div>
+  <h2 class="sec-title">Quarterly Growth Heatmap</h2>
+  <p class="sec-sub">YoY revenue % change by quarter. Read left to right to see if brand momentum improved or deteriorated through the year. Trajectory = Q1 vs latest quarter direction.</p>
+  <div class="hm-scroll"><div id="hm-global"></div></div>
+</div>
+</section>
+
+<!-- ════ UNITED STATES ════ -->
+<section class="section" id="us">
+<div class="section-inner">
+  <div class="sec-kicker">Region · United States</div>
+  <h2 class="sec-title">United States</h2>
+
+  <div class="rh rh-us">
+    <div class="rh-left"><div class="rh-flag">🇺🇸</div><div><div class="rh-name">United States</div><div class="rh-sub">20 brands · Sport · Casual · Premium · Dept Store · Mass Market</div></div></div>
+    <div class="rh-right" id="rk-us"></div>
+  </div>
+
+  <div class="callout-row">
+    <div class="callout c-blue"><div class="c-tag">Revenue</div><p>13 of 20 US brands grew FY25. <strong>Premium and value outperformed</strong>; mid-market department stores Kohl's and Macy's declined every quarter. Tariff headwinds on Asia-sourced goods emerged as a shared H2 cost pressure across nearly every brand.</p></div>
+    <div class="callout c-green"><div class="c-tag">Income & Margins</div><p><strong>Nike income collapsed from $5.70B → $3.22B (–44%).</strong> Under Armour posted a –$187M net loss. Promotional discounting, freight costs, and wage inflation compressed margins. Winners: Ralph Lauren (record 68.5% gross margin), Victoria's Secret (first full profitable year).</p></div>
+    <div class="callout c-gold"><div class="c-tag">Inventory</div><p><strong>Nike led inventory reduction at –$620M</strong> (7.52→6.90B), protecting margins. Levi's and AEO also cut sharply. Lululemon inventory edged up while revenue stalled — a watch point. Brands that discounted to clear excess (AEO Q1, Columbia) saw immediate margin pain.</p></div>
+    <div class="callout c-red"><div class="c-tag">Debt</div><p><strong>VF Corp ($5.43B)</strong> carries the highest leverage risk — sold Dickies $600M to deleverage. Macy's ($2.78B) managing decline. Nike debt rose to $12.87B. Ralph Lauren, Levi's, and AEO all reduced debt YoY.</p></div>
+  </div>
+
+  <div class="g2">
+    <div class="panel">
+      <div class="panel-title">US Revenue Heatmap · Q1–Q4</div>
+      <div class="panel-sub">Darker green = stronger growth · Red = decline · Right column = trajectory direction</div>
+      <div class="hm-scroll"><div id="hm-us"></div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Q1 vs Q4 Momentum Scatter · US Brands</div>
+      <div class="panel-sub">X = Q1 YoY% · Y = Q4 YoY% · Above diagonal line = improving through the year</div>
+      <div style="position:relative;height:220px;width:100%"><canvas id="c-us-scatter" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="panel">
+      <div class="panel-title">Nike · FY24 vs FY25 Quarterly Revenue ($B)</div>
+      <div class="panel-sub">Every quarter worse YoY — steepest in Q4 at –12%</div>
+      <div style="position:relative;height:160px;width:100%"><canvas id="c-nike" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Ralph Lauren · FY24 vs FY25 ($B)</div>
+      <div class="panel-sub">Accelerating all year — Q4 best at +9.6% · Record $7.08B</div>
+      <div style="position:relative;height:160px;width:100%"><canvas id="c-rl" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Victoria's Secret · FY25 Recovery ($B)</div>
+      <div class="panel-sub">0% Q1 → +8.4% Q3 — biggest US turnaround story</div>
+      <div style="position:relative;height:160px;width:100%"><canvas id="c-vs" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-bottom:16px">
+    <div class="panel-title">US Brands · Net Income FY2025 ($B)</div>
+    <div class="panel-sub">Green = profitable · Red = net loss · Nike and Under Armour dramatic outliers</div>
+    <div style="position:relative;height:160px;width:100%"><canvas id="c-us-inc" style="position:absolute;inset:0" height="150"></canvas></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">US Brand Scorecard · FY2025</div>
+    <div class="panel-sub">Revenue · YoY % · Q1→Q4 growth · Trajectory · Income · Inventory & Debt signals</div>
+    <div style="overflow-x:auto"><table class="dt" id="t-us"></table></div>
+  </div>
+</div>
+</section>
+
+<!-- ════ EUROPE ════ -->
+<section class="section" id="eu">
+<div class="section-inner">
+  <div class="sec-kicker">Region · Europe</div>
+  <h2 class="sec-title">Europe</h2>
+
+  <div class="rh rh-eu">
+    <div class="rh-left"><div class="rh-flag">🇪🇺</div><div><div class="rh-name">Europe</div><div class="rh-sub">5 brands · Sport · Fast Fashion · Premium/Accessible Luxury</div></div></div>
+    <div class="rh-right" id="rk-eu"></div>
+  </div>
+
+  <div class="callout-row">
+    <div class="callout c-blue"><div class="c-tag">Revenue</div><p><strong>Widest spread of any region.</strong> Adidas best year in a decade (+5.5%, EBIT +54%) on Samba/Originals supercycle. Inditex accelerated to +10.5% in Q4. <strong>PUMA collapsed –14.1%</strong> — worst in company history. H&M barely grew +0.9%. Hugo Boss declined all three reported quarters.</p></div>
+    <div class="callout c-green"><div class="c-tag">Income & Margins</div><p>Adidas net income ~€1.6B — first positive in two years, EBIT +54% to €2.06B. <strong>PUMA swung to a record €643.6M net loss</strong> — channel restructuring, impairments, and deep discounting. H&M best operating margin in 6 years (8.1%) via cost discipline, not volume.</p></div>
+    <div class="callout c-gold"><div class="c-tag">Inventory</div><p><strong>H&M cut $450M of inventory</strong> (3.67→3.22B) — quality-over-quantity strategy delivering. Adidas modest +4% build for planned growth. PUMA cleared stock via deep discounting — contributing directly to the record net loss. Inditex maintained just-in-time discipline all year.</p></div>
+    <div class="callout c-red"><div class="c-tag">Debt</div><p><strong>Cleanest balance sheets globally.</strong> Adidas reduced debt 2.70→2.55B and launched €500M buyback. H&M cut 0.48→0.42B. Inditex near-zero net debt. PUMA and Hugo Boss debt stable but record losses degraded interest coverage ratios meaningfully.</p></div>
+  </div>
+
+  <div class="g2">
+    <div class="panel">
+      <div class="panel-title">EU Brands · Quarterly Revenue FY25 ($B)</div>
+      <div class="panel-sub">Adidas surge vs PUMA collapse — the European sportswear divergence story</div>
+      <div style="position:relative;height:180px;width:100%"><canvas id="c-eu-rev" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">EU Brands · Net Income FY25 ($B)</div>
+      <div class="panel-sub">PUMA record –$0.701B loss vs Adidas record +$1.74B</div>
+      <div style="position:relative;height:180px;width:100%"><canvas id="c-eu-inc" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-bottom:16px">
+    <div class="panel-title">EU Revenue Heatmap · Q1–Q4</div>
+    <div class="panel-sub">Adidas Q1 surge (+22.7%) normalised as Yeezy comps were lapped. PUMA Q4 collapse (–26.1%) = full strategic reset impact.</div>
+    <div class="hm-scroll"><div id="hm-eu"></div></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">EU Brand Scorecard · FY2025</div>
+    <div style="overflow-x:auto"><table class="dt" id="t-eu"></table></div>
+  </div>
+</div>
+</section>
+
+<!-- ════ CANADA ════ -->
+<section class="section" id="ca">
+<div class="section-inner">
+  <div class="sec-kicker">Region · Canada</div>
+  <h2 class="sec-title">Canada</h2>
+
+  <div class="rh rh-ca">
+    <div class="rh-left"><div class="rh-flag">🇨🇦</div><div><div class="rh-name">Canada</div><div class="rh-sub">2 brands · Athleisure (Lululemon) · Everyday Luxury (Aritzia)</div></div></div>
+    <div class="rh-right" id="rk-ca"></div>
+  </div>
+
+  <div class="callout-row">
+    <div class="callout c-blue"><div class="c-tag">Revenue</div><p><strong>Aritzia: fastest-growing brand in the entire dataset — +20.2% FY25</strong>, double-digit every quarter. US flagships (Manhattan, Chicago) + DTC digital drove it. Lululemon decelerated from +7.2% Q1 to flat Q3 as US comparable traffic turned negative. China International +33% buffered but couldn't offset.</p></div>
+    <div class="callout c-green"><div class="c-tag">Income & Margins</div><p>Aritzia EBITDA <strong>+121.8% on revenue +20%</strong> — exceptional operating leverage. FY26 guidance raised to $3.05–3.25B. Lululemon income tracked revenue deceleration; <strong>Q4/FY25 results due March 17, 2026.</strong> Key question: can International income offset US margin compression?</p></div>
+    <div class="callout c-gold"><div class="c-tag">Inventory</div><p>Lululemon inventory edged up ($1.59→$1.64B) while revenue growth stalled. <strong>Watch point for Q4 margins.</strong> Aritzia inventory proportional with planned US openings. Both Canadian brands carry <strong>zero or near-zero debt</strong> — rare financial advantage.</p></div>
+    <div class="callout c-red"><div class="c-tag">Debt</div><p><strong>Lululemon: zero debt</strong> — the only major brand in this report with a completely clean balance sheet. Aritzia added modest debt for US build-out but EBITDA +121.8% means leverage improved dramatically. Both have maximum flexibility for FY26 expansion.</p></div>
+  </div>
+
+  <div class="g2">
+    <div class="panel">
+      <div class="panel-title">Aritzia vs Lululemon · Quarterly Revenue ($B) FY24 vs FY25</div>
+      <div class="panel-sub">Contrasting trajectories from the same region</div>
+      <div style="position:relative;height:180px;width:100%"><canvas id="c-ca-rev" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Canada · Revenue Growth Trajectory (%) Q1 → Q3</div>
+      <div class="panel-sub">Aritzia accelerating strongly · Lululemon decelerating to flat</div>
+      <div style="position:relative;height:180px;width:100%"><canvas id="c-ca-traj" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Canada Brand Scorecard · FY2025</div>
+    <div style="overflow-x:auto"><table class="dt" id="t-ca"></table></div>
+  </div>
+</div>
+</section>
+
+<!-- ════ JAPAN ════ -->
+<section class="section" id="jp">
+<div class="section-inner">
+  <div class="sec-kicker">Region · Japan</div>
+  <h2 class="sec-title">Japan</h2>
+
+  <div class="rh rh-jp">
+    <div class="rh-left"><div class="rh-flag">🇯🇵</div><div><div class="rh-name">Japan</div><div class="rh-sub">1 brand · Fast Retailing (Uniqlo · GU · Theory)</div></div></div>
+    <div class="rh-right" id="rk-jp"></div>
+  </div>
+
+  <div class="callout-row">
+    <div class="callout c-blue"><div class="c-tag">Revenue</div><p>Fast Retailing $21.89B (+3.2%). Strong Q1 surge (+10.9%) from Uniqlo US expansion (50th US store) and Heattech 3.0 launch. Q2 dipped (–3.2%) on JPY seasonal weakness. Q3–Q4 normalised. <strong>Marni and Lemaire collaborations sold out globally</strong>, confirming fashion credibility.</p></div>
+    <div class="callout c-green"><div class="c-tag">Income & Margins</div><p>FY25 operating income <strong>$2.887B — a record</strong>, up from $2.645B (+9.2%). Better gross margins from lean inventory and fewer markdowns, partially offset by higher US labour costs. <strong>FY26 profit forecast raised</strong> after strong trading update.</p></div>
+    <div class="callout c-gold"><div class="c-tag">Inventory</div><p>Inventory managed as a <strong>core strategic competency.</strong> Heattech seasonal build (Q1–Q2) then disciplined sell-down (Q3–Q4). Grew modestly $2.24→$2.31B in line with store expansion. <strong>No excess stock reported at any point.</strong> Zero net debt.</p></div>
+    <div class="callout c-red"><div class="c-tag">Debt</div><p><strong>Zero net debt — three consecutive years of reduction</strong> driven by strong Uniqlo operating cash flow across ~2,400 global stores. One of two cleanest balance sheets in this report. Significant capacity for US and India expansion. FY26 guidance raised.</p></div>
+  </div>
+
+  <div class="g2">
+    <div class="panel">
+      <div class="panel-title">Fast Retailing · Revenue & Net Income by Quarter ($B)</div>
+      <div class="panel-sub">Bars = Revenue · Gold line = Net Income · Q1 seasonally strongest quarter</div>
+      <div style="position:relative;height:180px;width:100%"><canvas id="c-jp-combo" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Fast Retailing · Quarterly YoY Growth (%)</div>
+      <div class="panel-sub">Q2 JPY translation dip vs strong Q1 surge — the FX impact story</div>
+      <div style="position:relative;height:160px;width:100%"><canvas id="c-jp-yoy" style="position:absolute;inset:0" height="170"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Japan Brand Scorecard · FY2025</div>
+    <div style="overflow-x:auto"><table class="dt" id="t-jp"></table></div>
+  </div>
+</div>
+</section>
+
+<!-- ════ INVENTORY & DEBT ════ -->
+<section class="section" id="balance">
+<div class="section-inner">
+  <div class="sec-kicker">Balance Sheet Analysis</div>
+  <h2 class="sec-title">Inventory & Debt · Three-Year View</h2>
+  <p class="sec-sub">Inventory direction reveals demand management quality and forward margin risk. Debt trajectory signals financial health. Cross-region view shows where leverage risk concentrates.</p>
+
+  <div class="g2">
+    <div class="panel">
+      <div class="panel-title">Inventory Change FY24 → FY25 ($B)</div>
+      <div class="panel-sub">Green bars = inventory reduced (lean, margin-protective) · Red = inventory built (markdown risk)</div>
+      <div style="position:relative;height:280px;width:100%"><canvas id="c-inv-delta" style="position:absolute;inset:0" height="240"></canvas></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Debt Levels FY23 / FY24 / FY25 ($B) · High-Leverage Brands</div>
+      <div class="panel-sub">Three-year trajectory · Falling bars = delevering · Rising = increasing risk</div>
+      <div style="position:relative;height:220px;width:100%"><canvas id="c-debt-3yr" style="position:absolute;inset:0" height="240"></canvas></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Full Inventory & Debt Summary · All 28 Brands</div>
+    <div class="panel-sub">▼ Lean = inventory fell FY24→FY25 · ▲ Build = rose (markdown risk) · Debt Δ = FY24→FY25 net movement</div>
+    <div style="overflow-x:auto"><table class="dt" id="t-balance"></table></div>
+  </div>
+</div>
+</section>
+
+<!-- ════ WHAT SOLD ════ -->
+<section class="section" id="products">
+<div class="section-inner">
+  <div class="sec-kicker">Product Intelligence</div>
+  <h2 class="sec-title">What Sold · Q1 to Q4, Brand by Brand</h2>
+  <p class="sec-sub">Top-selling product categories and primary headwinds per quarter. Sourced from earnings call transcripts and investor presentations.</p>
+
+  <div class="callout-row" style="margin-bottom:28px">
+    <div class="callout c-blue"><div class="c-tag">Q1 Global Theme</div><p><strong>Adidas Samba/Originals supercycle</strong> dominated global footwear. Levi's women's wide-leg flare denim led denim globally. Ralph Lauren Polo lifestyle surged in Asia-Pacific. Zara spring womenswear led Inditex.</p></div>
+    <div class="callout c-green"><div class="c-tag">Q2 Global Theme</div><p><strong>Adidas Running +25%</strong> — the surprise outperformer. Hollister youth denim/bikinis +17%. Inditex summer dresses all regions. Aritzia knitwear +20.8% — its peak quarter. PVH Calvin Klein jeans & underwear back to growth.</p></div>
+    <div class="callout c-gold"><div class="c-tag">Q3 Global Theme</div><p><strong>Victoria's Secret PINK activewear +11% comps</strong> — teen athleisure turnaround confirmed. Urban Outfitters Anthropologie +10.9%. Inditex Zara autumn knitwear accelerating. Levi's DTC hits 50% of total sales.</p></div>
+    <div class="callout c-red"><div class="c-tag">Q4 Global Theme</div><p><strong>Inditex Q4 +10.5%</strong> — fastest quarter of the year. Ralph Lauren +9.6% all regions. <strong>PUMA collapsed –26.1%</strong> on strategic reset. Nike Q4 worst at –12.0% — Win Now plan not yet delivering revenue.</p></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">Product & Category Intelligence · Q1–Q4 by Brand, All Regions</div>
+    <div class="panel-sub">Top 3 revenue drivers and primary headwind per quarter. Source: earnings call transcripts and investor presentations.</div>
+    <div style="overflow-x:auto"><table class="ptbl" id="t-prod"></table></div>
+  </div>
+</div>
+</section>
+
+</div><!-- end page-wrap -->
+</div><!-- end app-shell -->
+
+<script>
+const D = {"Nike":{"rg":"US","ct":"Sport","r25":[11.59,12.35,11.27,11.1,46.31],"r24":[12.94,13.39,12.43,12.61,51.36],"i25":[1.05,1.16,0.67,0.56,3.22],"yoy":[-10.4,-7.8,-9.3,-12.0,-9.8],"inv":[7.97,7.52,6.9],"dbt":[11.07,12.04,12.87],"news":["Dec 2025: Nike filed patent for AI-powered fit technology","Nov 2025: Elliott Hill Win Now plan \u2014 cutting 2,000+ corporate roles","Oct 2025: Nike paused Converse turnaround investment"],"sold":{"Q1":{"d":["Running footwear \u2014 Air Max & Pegasus","Sport performance T-shirts & shorts","EMEA resilience"],"h":["Revenue -10%","NIKE Direct -13%"]},"Q2":{"d":["Jordan Brand sneakers, hoodies, tracksuits","Holiday sportswear basics \u2014 fleece, joggers"],"h":["Revenue -8%","Gross margin -100bps"]},"Q3":{"d":["Win Now plan early signs","Performance running & training apparel","Wholesale stabilising"],"h":["Revenue -9%","China -17%"]},"Q4":{"d":["Sport offence activations","Running footwear investment","Elliott Hill leadership"],"h":["Revenue -12% steepest drop","Digital -26%"]}}},"Adidas":{"rg":"EU","ct":"Sport","r25":[6.7,6.49,7.22,6.62,27.03],"r24":[5.46,6.32,6.97,6.42,25.63],"i25":[0.54,0.59,0.53,0.18,1.74],"yoy":[22.7,2.7,3.6,3.1,5.5],"inv":[5.93,5.96,6.2],"dbt":[2.84,2.7,2.55],"news":["Mar 2026: Adidas FY2025 record revenue EUR 24.8B (+10% reported) \u2014 EBIT +54% to EUR 2.06B","Mar 2026: Adidas Q4 FY25 revenue +11% currency-neutral to EUR 6.08B \u2014 all regions grew","Mar 2026: Adidas launched EUR 500M share buyback programme after record year"],"sold":{"Q1":{"d":["Originals \u2014 Samba, Gazelle, Terrace footwear","Running shoes \u2014 Supernova, Boston","Football kits"],"h":["EUR headwinds -\u20ac300M","North America cautious"]},"Q2":{"d":["Originals Samba dominates streetwear","Running +25%","Apparel \u2014 Adicolor, performance tees"],"h":["Yeezy comp \u20ac200M lapped","EUR translation negative"]},"Q3":{"d":["Record Q3 \u2014 Originals Samba/Gazelle strongest","Training apparel, football jerseys","All categories double-digit"],"h":["Yeezy comp \u20ac200M lapped","US tariffs on margin"]},"Q4":{"d":["Originals footwear \u2014 Samba, Gazelle, Campus","North America double-digit","Apparel \u2014 fleece, puffer jackets"],"h":["EUR translation >\u20ac1B drag","Yeezy comp"]}}},"Lululemon":{"rg":"CA","ct":"Athleisure","r25":[2.37,2.4,2.4,null,null],"r24":[2.21,2.37,2.4,3.61,10.59],"i25":[0.33,0.35,null,null,null],"yoy":[7.2,1.3,0.0,null,null],"inv":[1.66,1.59,1.64],"dbt":[0.0,0.0,0.0],"news":["Mar 2026: LULU Q4 & FY25 full results expected March 17, 2026","Feb 2026: Activist investor Barington Capital disclosed stake \u2014 pressuring CEO change","Jan 2026: LULU updated Q4 revenue guidance upward at ICR Conference"],"sold":{"Q1":{"d":["Women's yoga pants & leggings","Menswear joggers & shorts +14%","International +38% \u2014 China DTC"],"h":["North America comps -1%","US traffic tepid"]},"Q2":{"d":["Women's running & yoga apparel","Men's ABC trousers, shorts, T-shirts","International \u2014 China growth sustained"],"h":["Americas only +7%","US comparable weak"]},"Q3":{"d":["Women's athleisure \u2014 leggings, tanks, jackets","Menswear expanding \u2014 hoodies, joggers"],"h":["North America flat","US consumer caution"]},"Q4":{"d":["Holiday gifting \u2014 accessories, gift cards","Women's yoga pants, Define jackets","International +38%"],"h":["North America growth decelerating","Competition intensifying"]}}},"Gap Inc":{"rg":"US","ct":"Casual/Value","r25":[3.5,3.72,3.94,4.24,15.4],"r24":[3.39,3.54,3.83,4.15,15.09],"i25":[0.28,0.27,0.27,0.36,1.18],"yoy":[3.2,5.1,2.9,2.2,2.1],"inv":[1.82,1.63,1.7],"dbt":[1.49,1.49,1.49],"news":["Mar 2026: Gap Inc FY25 full year $15.40B revenue \u2014 11 consecutive positive comp quarters","Mar 2026: Gap Q4 FY25 $4.24B (+2.2% YoY) \u2014 Athleta comps -10% remains a drag","Jan 2026: Gap Inc announced 30-store Banana Republic closure programme"],"sold":{"Q1":{"d":["Old Navy \u2014 activewear, basics, kids denim","Gap brand \u2014 khakis, denim, casual shirts","Operating margin +140bps"],"h":["Revenue only +2%","Banana Republic weaker"]},"Q2":{"d":["Old Navy summer basics, activewear","Gap brand summer dresses, denim","Gross margin highest in 20 years"],"h":["Banana Republic soft comps","Athleta slow recovery"]},"Q3":{"d":["Old Navy family apparel \u2014 fleece, denim","Gap brand casual layering pieces"],"h":["Banana Republic comp negative","Athleta below plan"]},"Q4":{"d":["Old Navy holiday \u2014 family fleece, activewear","Gap brand outerwear, denim, knits"],"h":["Banana Republic structural weakness","Athleta slow recovery"]}}},"A&F":{"rg":"US","ct":"Premium Casual","r25":[1.09,1.17,1.34,1.67,5.27],"r24":[1.02,1.13,1.33,1.58,4.95],"i25":[0.11,0.128,0.12,0.245,0.603],"yoy":[6.9,3.5,0.8,5.7,6.5],"inv":[0.46,0.5,0.52],"dbt":[0.23,0.22,0.21],"news":["Mar 2026: A&F Q4 FY25 $1.67B (+5% YoY) \u2014 record annual sales $5.27B for 2nd consecutive record year","Mar 2026: A&F cautious 2026 outlook \u2014 tariff uncertainty and moderating consumer demand","Dec 2025: Abercrombie opened Paris flagship \u2014 European luxury positioning"],"sold":{"Q1":{"d":["Abercrombie premium denim jeans, chinos, linen shirts","Women's dresses, blouses, trousers","Gross margin >67%"],"h":["Tariff sourcing risk","Hollister below Abercrombie pace"]},"Q2":{"d":["Abercrombie summer dresses, shorts, linen","Hollister youth denim, graphic tees, bikinis +17%"],"h":["International slower than US","Competition in teen segment"]},"Q3":{"d":["Hollister back-to-school \u2014 denim, graphic tees, outerwear","Gilly Hicks intimates growth"],"h":["Abercrombie slight -2% tough comp","Growth moderating"]},"Q4":{"d":["Abercrombie holiday outerwear, knitwear, denim","Hollister holiday \u2014 denim, hoodies, party dressing"],"h":["Hollister below Abercrombie brand momentum","FX drag"]}}},"Ralph Lauren":{"rg":"US","ct":"Premium Lifestyle","r25":[1.51,1.73,2.03,1.72,7.08],"r24":[1.5,1.63,1.93,1.57,6.63],"i25":[0.168,0.261,0.304,0.208,0.932],"yoy":[0.7,6.1,5.2,9.6,6.8],"inv":[1.08,0.96,0.98],"dbt":[1.61,1.59,1.6],"news":["Feb 2026: Ralph Lauren FY25 record $7.08B \u2014 raised FY26 outlook","Jan 2026: Opened 10 new stores in Southeast Asia","Dec 2025: Polo Bear x Palace Skateboards \u2014 sold out globally"],"sold":{"Q1":{"d":["Polo shirts & polos","Men's chinos & suits","DTC comp +4%"],"h":["North America wholesale -8%","FX headwinds"]},"Q2":{"d":["Outerwear \u2014 blazers, puffer jackets","Women's dresses & blouses","Europe +9%"],"h":["North America dept store weak","FX drag"]},"Q3":{"d":["Holiday dressing \u2014 sweaters, suits, blazers","Asia +17%","Europe +14%"],"h":["North America wholesale headwinds","Dept store traffic softer"]},"Q4":{"d":["All regions grew \u2014 NA +8%, EU +10%, Asia +21%","DTC digital led","Polo shirts & classic lifestyle dressing"],"h":["Wholesale restructuring","Tariff uncertainty"]}}},"Levi's":{"rg":"US","ct":"Denim","r25":[1.53,1.45,1.54,null,null],"r24":[1.56,1.44,1.52,1.84,6.03],"i25":[0.051,0.08,0.122,null,null],"yoy":[-1.9,0.7,1.3,null,null],"inv":[1.63,1.45,1.38],"dbt":[1.12,1.05,0.98],"news":["Jan 2026: Levi's named women's jeans the #1 fastest-growing category globally","Dec 2025: Levi's x Beyonc\u00e9 Cowboy Carter collaboration \u2014 denim jackets sold out 48h","Nov 2025: Dockers fully wound down \u2014 pure-play denim focus"],"sold":{"Q1":{"d":["Levi's 501 \u2014 core denim jeans franchise","Women's jeans \u2014 flare, wide-leg, mom jeans","DTC +12%"],"h":["Reported revenue +3% only (FX -4%)","Tariff uncertainty on US sourcing"]},"Q2":{"d":["Women's denim \u2014 flare jeans, shorts, jackets","Levi's tops & denim shirts","Europe +14%"],"h":["Asia flat","FX headwinds"]},"Q3":{"d":["501 & Slim denim \u2014 men's & women's","Denim jackets trending","DTC 50% of sales"],"h":["Reported revenue only +1% (FX)","North America flat reported"]},"Q4":{"d":["Women's jeans \u2014 holiday gifting","Core denim franchise DTC","Beyond Yoga holiday activewear"],"h":["US -7% reported","FX headwinds"]}}},"Under Armour":{"rg":"US","ct":"Sport","r25":[1.18,1.07,1.26,1.18,5.2],"r24":[1.32,1.18,1.4,1.33,5.23],"i25":[0.016,0.026,0.072,-0.189,-0.187],"yoy":[-10.6,-9.3,-10.0,-11.3,-0.6],"inv":[0.99,0.89,0.83],"dbt":[0.59,0.65,0.6],"news":["Feb 2026: Under Armour exploring potential sale of company \u2014 strategic review initiated","Feb 2026: UA FY25 full year revenue $5.20B \u2014 net loss -$187M after restructuring charges","Jan 2026: UA launched Phantom 4 running shoe \u2014 performance running category push"],"sold":{"Q1":{"d":["Running footwear \u2014 HOVR Sonic, Phantom","Training apparel \u2014 compression shorts, shirts"],"h":["Revenue -11%","North America -8%"]},"Q2":{"d":["Gross margin improvement from premiumisation","Training apparel & shorts"],"h":["Revenue -9%","North America wholesale -20%"]},"Q3":{"d":["Performance running & training footwear","Team sports apparel"],"h":["Revenue -10%","Team sports weaker"]},"Q4":{"d":["Kevin Plank restructuring \u2014 performance focus","Innovation pipeline rebuilding"],"h":["Operating loss -$189M","North America persistent weakness"]}}},"PVH Corp":{"rg":"US","ct":"Premium/Contemporary","r25":[1.98,2.17,2.29,null,null],"r24":[1.95,2.07,2.25,2.37,8.65],"i25":[0.175,0.224,0.16,null,null],"yoy":[1.5,4.8,1.8,null,null],"inv":[1.63,1.38,1.4],"dbt":[3.02,2.85,2.7],"news":["Jan 2026: PVH confirmed Calvin Klein underwear is #1 selling underwear globally","Dec 2025: PVH divested Heritage Brands","Nov 2025: CK jeans Kendall Jenner campaign \u2014 record DTC sales Q3"],"sold":{"Q1":{"d":["Calvin Klein jeans & denim jackets","CK underwear \u2014 men's & women's","Tommy Hilfiger polo shirts & chinos"],"h":["Revenue -3%","China sluggish"]},"Q2":{"d":["CK jeans \u2014 slim, straight, wide-leg","CK underwear & loungewear","Europe DTC"],"h":["Revenue -6%","China/Asia soft"]},"Q3":{"d":["CK underwear & denim franchise","Tommy outerwear \u2014 puffer jackets, blazers"],"h":["Revenue -5%","FX"]},"Q4":{"d":["CK denim & underwear holiday gifting","Tommy holiday knitwear, outerwear"],"h":["FY24 revenue -6% to $8.65B","China weak"]}}},"Inditex":{"rg":"EU","ct":"Fast Fashion","r25":[10.0,11.82,10.68,null,null],"r24":[9.77,11.61,10.23,11.17,42.08],"i25":[1.6,1.96,1.97,null,null],"yoy":[2.4,1.8,4.4,null,null],"inv":[3.47,3.6,3.75],"dbt":[0.0,0.0,0.0],"news":["Feb 2026: Inditex trading update \u2014 Nov-Dec 2025 +10.6% constant currency","Jan 2026: Zara launched AI-powered styling tool","Dec 2025: Inditex announced \u20ac1B sustainability investment"],"sold":{"Q1":{"d":["Zara women's \u2014 linen dresses, printed tops, blouses","Zara denim \u2014 wide-leg, straight jeans","Kidswear"],"h":["EUR headwinds reduce USD values","Macro pressure some markets"]},"Q2":{"d":["Zara summer dresses, beachwear, linen","Women's sandals & accessories","Americas +double-digit"],"h":["FX translation drag","Shein ultra-fast fashion pressure"]},"Q3":{"d":["Zara autumn/winter \u2014 knitwear, outerwear, denim","Massimo Dutti premium suits & coats","Gross margin +79bps to 62.2%"],"h":["FX headwinds","Global macro uncertainty"]},"Q4":{"d":["Zara holiday dresses, party wear, knitwear","Online 26.4% of sales"],"h":["FX negative","Jan 2025 trading softer"]}}},"H&M Group":{"rg":"EU","ct":"Fast Fashion","r25":[5.48,6.44,5.6,5.39,22.91],"r24":[5.41,6.2,5.61,5.48,22.7],"i25":[0.111,0.432,0.33,0.394,1.1],"yoy":[1.3,3.9,-0.2,-1.6,0.9],"inv":[4.16,3.67,3.22],"dbt":[0.54,0.48,0.42],"news":["Jan 2026: H&M Group FY25 full year operating margin 8.1% \u2014 strongest in 6 years","Dec 2025: H&M x Stella McCartney 2026 collaboration announced","Nov 2025: H&M CDP A-listed for climate transparency"],"sold":{"Q1":{"d":["H&M spring basics \u2014 T-shirts, blouses, light knitwear","COS minimalist womenswear","& Other Stories accessories"],"h":["SEK/USD FX headwinds","Shein pressure"]},"Q2":{"d":["H&M summer dresses, swimwear, linen","COS premium dresses & trousers"],"h":["Revenue growth modest","Zara, Shein competition"]},"Q3":{"d":["H&M autumn knitwear, outerwear, basics","COS autumn/winter \u2014 tailored trousers, coats","Inventory -12%"],"h":["Revenue -1%","SEK/USD FX"]},"Q4":{"d":["H&M holiday party wear, knitwear","Operating profit +38%","Inventory lean -12%"],"h":["Net sales -5% reported SEK (FX)","Black Friday pulled Dec demand"]}}},"Hugo Boss":{"rg":"EU","ct":"Premium/Accessible Luxury","r25":[1.03,1.05,1.07,null,null],"r24":[1.09,1.1,1.1,1.26,4.58],"i25":[0.054,0.051,0.027,null,null],"yoy":[-5.5,-4.5,-2.7,null,null],"inv":[0.96,0.92,0.88],"dbt":[0.72,0.68,0.65],"news":["Jan 2026: Hugo Boss lowered FY2025 guidance \u2014 Q3 revenue -3% below expectations","Dec 2025: BOSS x Sabrina Carpenter campaign \u2014 youth brand awareness","Nov 2025: CEO Daniel Grieder admitted CLAIM5 strategy needs recalibration"],"sold":{"Q1":{"d":["BOSS menswear \u2014 suits, tailoring, smart casual shirts","BOSS outerwear \u2014 puffer jackets, trench coats"],"h":["Revenue -5%","China macro weakness"]},"Q2":{"d":["BOSS premium casualwear \u2014 trousers, polos, shirts","Europe stable"],"h":["Revenue -5%","China/Asia persistent weakness"]},"Q3":{"d":["BOSS autumn suits, blazers, smart casual","Americas stable"],"h":["Revenue -3%","China -double digits"]},"Q4":{"d":["BOSS holiday suits & tailoring","Americas momentum"],"h":["FY24 revenue -1% first decline","China weak all year"]}}},"PUMA":{"rg":"EU","ct":"Sport","r25":[2.16,2.31,2.3,1.7,7.95],"r24":[2.2,2.37,2.38,2.3,9.25],"i25":[0.038,0.065,0.055,-0.365,-0.701],"yoy":[-1.8,-2.5,-3.4,-26.1,-14.1],"inv":[1.78,1.67,1.62],"dbt":[0.62,0.6,0.58],"news":["Mar 2026: PUMA FY25 revenue EUR 7.29B (-8.1% currency-adj) \u2014 record net loss EUR 643.6M in company history","Mar 2026: PUMA Q4 FY25 sales -20.7% \u2014 strategic reset initiated by new CEO Arthur Hoeld hits full force","Mar 2026: PUMA cancels 2025 dividend \u2014 expects further operating losses in 2026"],"sold":{"Q1":{"d":["Speedcat sneakers \u2014 fastest growing product globally","Palermo lifestyle footwear","F1 motorsport apparel"],"h":["Revenue flat","Greater China -8%"]},"Q2":{"d":["Speedcat sustained global momentum","DTC expansion","Football season products"],"h":["Revenue -1%","China sluggish"]},"Q3":{"d":["Running & training footwear \u2014 Deviate Elite","Motorsport apparel","Americas stable"],"h":["Revenue -3%","Profitability declining"]},"Q4":{"d":["Speedcat cultural moment \u2014 Lyst #2 trending sneaker","Full year +1%"],"h":["Net income -41% FY24","China challenges"]}}},"Fast Retailing":{"rg":"JP","ct":"Value/Basics","r25":[6.01,5.45,5.42,5.01,21.89],"r24":[5.42,5.63,5.24,4.93,21.22],"i25":[0.89,0.617,0.71,0.67,2.887],"yoy":[10.9,-3.2,3.4,1.6,3.2],"inv":[2.16,2.24,2.31],"dbt":[0.0,0.0,0.0],"news":["Feb 2026: Uniqlo opens 50th US store \u2014 major US expansion push","Jan 2026: Fast Retailing raises FY2026 profit forecast","Dec 2025: Uniqlo x Marni collaboration sold out globally in 6 hours"],"sold":{"Q1":{"d":["Heattech innerwear \u2014 undershirts, leggings","Ultra Light Down jackets","AIRism functional basics"],"h":["Weak JPY cuts USD conversion","Uniqlo NA small base"]},"Q2":{"d":["Knitwear & cashmere sweaters","Outerwear \u2014 fleece jackets, puffer coats","China expansion"],"h":["JPY depreciation","Seasonal moderation"]},"Q3":{"d":["Spring LifeWear \u2014 joggers, AIRism T-shirts, linen","Uniqlo China double-digit","SE Asia expansion"],"h":["JPY weak vs USD","Competition in basics"]},"Q4":{"d":["Fleece, denim basics, AIRism summer","Uniqlo International record revenues","GU Japan stable"],"h":["JPY depreciation reducing USD value","NA still subscale"]}}},"AEO":{"rg":"US","ct":"Casual/Youth","r25":[1.1,1.28,1.4,null,null],"r24":[1.21,1.29,1.31,1.61,5.33],"i25":[-0.085,0.06,0.12,null,null],"yoy":[-9.1,-0.8,6.9,null,null],"inv":[0.62,0.61,0.55],"dbt":[0.5,0.47,0.44],"news":["Jan 2026: AEO withdrew FY25 annual guidance \u2014 tariff and inventory uncertainty","Dec 2025: Aerie crossed $2B annual revenue milestone","Nov 2025: CEO Jay Schottenstein stepped back \u2014 new CEO search"],"sold":{"Q1":{"d":["Aerie \u2014 intimates, bralettes, leggings","American Eagle denim \u2014 jeans, shorts"],"h":["Revenue -5%","Inventory write-down $75M"]},"Q2":{"d":["Aerie intimates +11%","AE comps +1%","Denim shorts, graphic tees, summer dresses"],"h":["Higher promotional activity","US macro uncertainty"]},"Q3":{"d":["Record Q3 revenue $1.4B +7%","Aerie comps +11% \u2014 leggings, bras, loungewear","AE denim back-to-school"],"h":["Tariff uncertainty","Operating cost pressure"]},"Q4":{"d":["Holiday gifting \u2014 Aerie loungewear, AE denim","Winter knitwear, outerwear"],"h":["FY25 guidance withdrawn","Inventory write-down impact"]}}},"Kohl's":{"rg":"US","ct":"Dept Store","r25":[3.05,3.57,3.42,null,null],"r24":[3.18,3.73,3.51,5.19,15.96],"i25":[0.007,0.07,0.007,null,null],"yoy":[-4.1,-4.3,-2.6,null,null],"inv":[3.16,2.91,2.8],"dbt":[1.52,1.52,1.52],"news":["Jan 2026: New CEO Ashley Buchanan launched 'Back to Kohl's' turnaround plan","Dec 2025: Kohl's closed 27 stores \u2014 lease rationalisation","Nov 2025: Sephora now in 1,100+ stores \u2014 #1 traffic driver"],"sold":{"Q1":{"d":["Sephora at Kohl's \u2014 beauty outperforming","Women's casual apparel \u2014 knit tops, leggings","Active & outdoor category"],"h":["Revenue -4%","Traffic declines"]},"Q2":{"d":["Sephora beauty double-digit","Men's active & outdoor gear","Women's denim & casual"],"h":["Revenue -5%","Consumer caution"]},"Q3":{"d":["Sephora outperformance","Active wear","Home basics"],"h":["Revenue -3%","Comp -1.7%"]},"Q4":{"d":["Holiday \u2014 beauty, activewear, home","Sephora partnership"],"h":["Revenue -9.4%","Comp -6.7%"]}}},"Macy's":{"rg":"US","ct":"Dept Store","r25":[4.54,4.71,4.74,null,null],"r24":[4.85,4.94,4.74,7.76,23.09],"i25":[0.038,0.122,0.036,null,null],"yoy":[-6.4,-4.7,0.0,null,null],"inv":[3.82,3.31,3.1],"dbt":[3.0,2.97,2.78],"news":["Feb 2026: Macy's 150 store closure plan on track \u2014 50 closed so far","Jan 2026: Macy's rejected $5.8B Arkhouse/Brigade acquisition","Dec 2025: Bloomingdale's opened standalone shoe departments"],"sold":{"Q1":{"d":["Bloomingdale's luxury \u2014 designer handbags, shoes","Bluemercury prestige beauty","First 50 Macy's stores outperforming"],"h":["Macy's main -5.3%","Store traffic declines"]},"Q2":{"d":["Bloomingdale's +2% \u2014 luxury dresses, accessories","Bluemercury +2.4%","First 50 strategy working"],"h":["Macy's main brand soft","Revenue -4%"]},"Q3":{"d":["Bloomingdale's designer handbags, dresses","Macy's own brands \u2014 Style & Co","Active category"],"h":["Revenue -3.5%","Macy's main comp soft"]},"Q4":{"d":["Holiday \u2014 Bloomingdale's gift sets, designer goods","Bluemercury beauty gifting"],"h":["FY24 revenue -3.5% to $23.09B","150 store closures by 2027"]}}},"Victoria's Secret":{"rg":"US","ct":"Intimates","r25":[1.36,1.53,1.55,2.27,6.71],"r24":[1.36,1.49,1.43,2.11,6.22],"i25":[-0.009,0.065,0.08,0.238,0.374],"yoy":[0.0,2.7,8.4,7.6,7.9],"inv":[0.62,0.59,0.57],"dbt":[1.06,0.98,0.97],"news":["Mar 2026: VS Q4 FY25 $2.27B (+8% YoY) \u2014 best quarter since 2021 L Brands spin-off","Mar 2026: VS FY25 full year $6.55B \u2014 first full year with positive comparable sales growth +5%","Mar 2026: VS FY26 guidance $6.85-6.95B \u2014 operating income $430-460M projected"],"sold":{"Q1":{"d":["Bra innovation \u2014 new styles","PINK loungewear & joggers","Beauty \u2014 body mists & fragrances"],"h":["Revenue -3%","North America traffic weak"]},"Q2":{"d":["Bras & panties \u2014 summer styles","Beauty fragrance & body care","PINK activewear \u2014 biker shorts, bralettes"],"h":["Revenue flat","Promotional environment intense"]},"Q3":{"d":["PINK activewear +11% comps","Bra innovation performing","VS Beauty fragrance wins"],"h":["Revenue +2.8%","PINK turnaround in progress"]},"Q4":{"d":["Holiday \u2014 fragrance gift sets, lingerie gifting","VS bras & panties","PINK loungewear & pyjama sets"],"h":["Full year revenue only +0.6%","Brand repositioning ongoing"]}}},"VF Corp":{"rg":"US","ct":"Outdoor/Active","r25":[1.97,2.76,2.95,null,null],"r24":[1.87,2.63,3.01,2.39,9.9],"i25":[-0.131,-0.022,0.046,null,null],"yoy":[5.3,4.9,-2.0,null,null],"inv":[1.94,1.52,1.38],"dbt":[6.01,5.9,5.43],"news":["Feb 2026: VF Corp sold Dickies for $600M \u2014 debt reduction accelerating","Jan 2026: VF Corp Q3 FY26 revenue growth first time in 3 years \u2014 North Face led","Dec 2025: Vans launched Old Skool 2.0 \u2014 attempting turnaround"],"sold":{"Q1":{"d":["The North Face \u2014 outdoor jackets, fleece, footwear","Timberland boots & outdoor apparel"],"h":["Revenue -3%","Vans -16%"]},"Q2":{"d":["The North Face +6% \u2014 outerwear, fleece","Timberland +7% \u2014 boots & outdoor apparel"],"h":["Vans -9%","Revenue modest +2%"]},"Q3":{"d":["The North Face +8% \u2014 puffer jackets, fleece, boots","Timberland +5%","Americas strongest in 3 years"],"h":["Vans -8%","Debt $5.4B"]},"Q4":{"d":["The North Face holiday gifting","Americas DTC inflected positive","Timberland 5th consecutive growth quarter"],"h":["Vans structural decline","Leverage target 3.5x"]}}},"Urban Outfitters":{"rg":"US","ct":"Premium Casual","r25":[1.38,1.44,1.53,null,null],"r24":[1.27,1.37,1.38,1.56,5.55],"i25":[0.118,0.153,0.21,null,null],"yoy":[8.7,5.1,10.9,null,null],"inv":[0.57,0.58,0.6],"dbt":[0.25,0.24,0.23],"news":["Jan 2026: Urban Outfitters record Q4 & FY25 profits \u2014 Anthropologie led","Dec 2025: Nuuly rental subscriptions passed 300,000 members","Nov 2025: Free People launched FP Movement gym concept"],"sold":{"Q1":{"d":["Anthropologie \u2014 women's dresses, linen, home decor","Free People \u2014 boho dresses, maxi skirts, activewear","Nuuly rental subscriptions growing"],"h":["Urban Outfitters brand softer","Higher costs"]},"Q2":{"d":["Anthropologie women's summer dresses, accessories","Free People flowing skirts, tops, activewear","Record comps across brands"],"h":["Urban Outfitters slower growth","FX international"]},"Q3":{"d":["Record Q3 $1.53B +12%","Anthropologie autumn dresses, coats","Free People fall dresses & knitwear"],"h":["Urban Outfitters brand mid-single digit","Cost pressures"]},"Q4":{"d":["Record FY24 profits","Anthropologie holiday home, gifting, dresses","Free People holiday knitwear, outerwear"],"h":["Urban Outfitters below group","Competition from indie brands"]}}},"Columbia Sportswear":{"rg":"US","ct":"Outdoor","r25":[0.63,0.69,0.78,null,null],"r24":[0.68,0.73,0.79,0.88,3.24],"i25":[0.014,0.02,0.038,null,null],"yoy":[-7.4,-5.5,-1.3,null,null],"inv":[0.97,0.72,0.68],"dbt":[0.0,0.0,0.0],"news":["Jan 2026: Columbia CEO Tim Boyle returning \u2014 founder family retook control","Dec 2025: Columbia restructured wholesale \u2014 reducing department store exposure","Nov 2025: SOREL launched women's fashion boot line"],"sold":{"Q1":{"d":["Columbia OutDry waterproof jackets","SOREL spring boots","Outdoor accessories"],"h":["Revenue -7%","Wholesale destocking"]},"Q2":{"d":["Columbia outdoor hiking apparel \u2014 shirts, shorts","SOREL warm weather footwear","Trail running"],"h":["Revenue -6%","Wholesale weak"]},"Q3":{"d":["Columbia autumn outerwear \u2014 fleece, insulated jackets","Fall hiking footwear","Mountain Hardwear technical gear"],"h":["Revenue -1%","Wholesale slow recovery"]},"Q4":{"d":["Columbia winter jackets & insulated gear","SOREL winter boots","Holiday outdoor gifting"],"h":["Revenue -3%","FY24 -7% to $3.24B"]}}},"Dick's Sporting":{"rg":"US","ct":"Sporting Goods","r25":[3.11,3.65,3.43,null,null],"r24":[3.02,3.47,3.28,4.1,13.44],"i25":[0.261,0.331,0.295,null,null],"yoy":[3.0,5.2,4.6,null,null],"inv":[2.21,2.14,2.08],"dbt":[1.5,1.46,1.41],"news":["Feb 2026: Dick's announced $2.4B acquisition of Foot Locker","Jan 2026: House of Sport expanded to 50 locations \u2014 comps +15%","Dec 2025: Dick's $120M investment in Unrivaled Sports"],"sold":{"Q1":{"d":["Nike & Adidas footwear \u2014 exclusive products","Outdoor apparel \u2014 jackets, fleece","Team sports equipment"],"h":["Revenue growth moderating","Higher SG&A from House of Sport"]},"Q2":{"d":["Footwear \u2014 running, basketball, training","Summer outdoor & golf","House of Sport outperforming"],"h":["Brand DTC competition","Inventory costs"]},"Q3":{"d":["Back-to-school footwear \u2014 Nike, Adidas, New Balance","Team sports apparel","Golf & outdoor"],"h":["Revenue +5% slowing","SG&A from new formats"]},"Q4":{"d":["Holiday footwear gifting","Winter outdoor apparel","Gift cards & experiences"],"h":["Revenue growth moderating","Foot Locker $2.4B risk"]}}},"Aritzia":{"rg":"CA","ct":"Everyday Luxury","r25":[0.49,0.58,0.67,0.82,2.74],"r24":[0.42,0.48,0.6,0.75,2.28],"i25":[0.022,0.059,0.096,0.119,0.229],"yoy":[16.7,20.8,11.7,9.3,20.2],"inv":[0.29,0.36,0.32],"dbt":[0.2,0.18,0.16],"news":["May 2025: Aritzia FY25 record $2.74B revenue \u2014 EBITDA +121.8%","Jan 2026: Aritzia raised FY26 guidance to $3.05-3.25B","Dec 2025: Aritzia opened iconic Manhattan and Chicago flagships"],"sold":{"Q1":{"d":["Women's dresses \u2014 core category","Structured blazers & trousers","Knitwear & cardigans"],"h":["CAD/USD FX","Tariff uncertainty on FY26"]},"Q2":{"d":["Spring/summer dresses","Linen & light knitwear","US market strong"],"h":["Higher marketing costs","Competition from premium casual brands"]},"Q3":{"d":["Fall \u2014 structured coats, blazers, trousers","Knitwear & layering pieces","US comps positive"],"h":["Canadian consumer caution","FX impact on USD"]},"Q4":{"d":["Holiday fashion \u2014 party dresses, knitwear","Record FY25 $2.74B revenue +20%","US now majority of revenue"],"h":["Tariff headwinds FY26","CAD/USD translation"]}}},"DXL":{"rg":"US","ct":"Big & Tall","r25":[0.105,0.114,0.101,null,null],"r24":[0.116,0.125,0.108,0.119,0.467],"i25":[-0.008,-0.005,-0.012,null,null],"yoy":[-9.5,-8.8,-6.5,null,null],"inv":[0.076,0.071,0.068],"dbt":[0.0,0.0,0.0],"news":["Dec 2025: DXL announced merger with FullBeauty \u2014 creating $1.2B inclusive sizing retailer","Nov 2025: DXL confirmed FullBeauty $172M term debt post-merger","Oct 2025: DXL FiTMAP 3D scanning on mobile app"],"sold":{"Q1":{"d":["Private label menswear \u2014 shirts, trousers, outerwear","FiTMAP technology rollout"],"h":["Revenue -9%","Lower store traffic"]},"Q2":{"d":["Private label \u2014 shirts, trousers, outerwear","FiTMAP driving repeat visits"],"h":["Revenue -9%","Macro challenges"]},"Q3":{"d":["Seasonal menswear","FiTMAP in 86 stores","FullBeauty merger announced"],"h":["Revenue -7%","Comp -7.4%"]},"Q4":{"d":["No outstanding debt \u2014 solid balance sheet","Store expansion","Private label margins"],"h":["Comp -8.7%","Revenue -13.1% Q4"]}}},"Walmart":{"rg":"US","ct":"Mass Market","r25":[165.61,169.34,169.59,null,null],"r24":[161.51,161.63,169.49,180.55,648.13],"i25":[5.1,4.5,4.94,null,null],"yoy":[2.5,4.8,0.1,null,null],"inv":[56.58,54.87,53.0],"dbt":[36.03,35.77,34.8],"news":["Jan 2026: Walmart reported strongest apparel comp in 5 years","Dec 2025: Walmart acquired Vizio to enhance targeted apparel marketing","Nov 2025: Walmart launched Fashion marketplace \u2014 3rd party premium brands"],"sold":{"Q1":{"d":["Private label apparel \u2014 Walmart basics, activewear","Value denim & casual","E-commerce +22%"],"h":["Apparel ASP pressure","Grocery dominant vs apparel"]},"Q2":{"d":["Back-to-school basics \u2014 T-shirts, jeans, uniforms","Value activewear","E-commerce growth"],"h":["Apparel price sensitivity","Target, Amazon competition"]},"Q3":{"d":["Casual basics \u2014 T-shirts, hoodies, jeans","Value outdoor \u2014 fleece, activewear"],"h":["Apparel mix modest","Inventory management"]},"Q4":{"d":["Holiday value basics \u2014 gifting, fleece, loungewear","E-commerce omnichannel","Private label expansion"],"h":["Apparel comp modest","Shein/Temu competition"]}}},"Lands' End":{"rg":"US","ct":"Casual DTC","r25":[0.27,0.28,0.29,null,null],"r24":[0.29,0.29,0.3,0.42,1.29],"i25":[-0.012,-0.004,-0.014,null,null],"yoy":[-6.9,-3.4,-3.3,null,null],"inv":[0.36,0.32,0.3],"dbt":[0.27,0.25,0.24],"news":["Jan 2026: Lands' End appointed new CEO \u2014 digital transformation focus","Dec 2025: Expanded school uniform programme to 500+ districts","Nov 2025: Liquidated Japan operations \u2014 focus on US & UK"],"sold":{"Q1":{"d":["Swimwear & outdoor basics","School uniform programme","Canvas & catalog DTC"],"h":["Revenue -7%","Consumer shift to lower-price channels"]},"Q2":{"d":["Summer casual \u2014 chinos, shorts, dresses","Outdoor swim & water sports","School uniform orders"],"h":["Revenue -3%","Consumer cautious"]},"Q3":{"d":["Back-to-school uniforms","Fall basics \u2014 knitwear, outerwear","DTC channel stability"],"h":["Revenue -3%","High promotional intensity"]},"Q4":{"d":["Holiday fleece, gifting, outerwear","Catalog & DTC loyalty","Core basics"],"h":["Revenue -9% vs FY23","Net loss full year FY24"]}}},"Old Navy":{"rg":"US","ct":"Value Apparel","r25":[1.93,2.05,2.17,null,null],"r24":[1.87,1.95,2.12,2.29,8.28],"i25":[null,null,null,null,null],"yoy":[3.2,5.1,2.4,null,null],"inv":[null,null,null],"dbt":[null,null,null],"news":["Jan 2026: Old Navy named top US value apparel brand by Morning Consult","Dec 2025: Old Navy launched sustainable denim \u2014 100% recycled cotton","Nov 2025: Old Navy Thanksgiving weekend \u2014 record activewear sales"],"sold":{"Q1":{"d":["Value basics \u2014 T-shirts, jeans, activewear","Kids denim & family apparel","9th consecutive positive comp quarter"],"h":["Revenue growth modest +2-3%","Banana Republic dragging group"]},"Q2":{"d":["Summer basics","Activewear","6th consecutive positive comp"],"h":["Modest growth","Athleta recovery slow"]},"Q3":{"d":["Fall family apparel \u2014 denim, fleece","7th consecutive positive comp"],"h":["Growth rate modest vs competitive set"]},"Q4":{"d":["Holiday family gifting \u2014 fleece, activewear","Record holiday quarter"],"h":["Banana Republic offsets"]}}},"Banana Republic":{"rg":"US","ct":"Premium Casual","r25":[0.45,0.46,0.46,null,null],"r24":[0.47,0.48,0.47,0.52,1.98],"i25":[null,null,null,null,null],"yoy":[-4.3,-4.2,-2.1,null,null],"inv":[null,null,null],"dbt":[null,null,null],"news":["Jan 2026: Gap Inc confirmed 30 Banana Republic store closures in 2026","Dec 2025: Banana Republic hired new creative director from Prada \u2014 repositioning attempt","Nov 2025: Banana Republic relaunched premium leather bags line"],"sold":{"Q1":{"d":["Safari aesthetic \u2014 linen, khakis, blazers","Suede & leather accessories"],"h":["Comp negative \u2014 structural decline","Revenue -9%"]},"Q2":{"d":["Summer office-casual \u2014 linen, light knits"],"h":["Revenue -9%","Comp negative"]},"Q3":{"d":["Fall office wear \u2014 trousers, blazers, leather goods"],"h":["Comp negative","Structural challenges"]},"Q4":{"d":["Holiday \u2014 cashmere, leather accessories"],"h":["Revenue -7%","Consistent underperformance"]}}}};
+</script>
+<script>
+// ─── HELPERS ────────────────────────────────────────────────
+const QQ = ['Q1','Q2','Q3','Q4'];
+const fB = v => v != null ? '$' + Math.abs(v).toFixed(2) + 'B' : '—';
+const fP = v => v != null ? (v >= 0 ? '+' : '') + v.toFixed(1) + '%' : '—';
+const vC = v => v == null ? 'vna' : v > 0 ? 'vup' : v < 0 ? 'vdn' : 'vfl';
+const ALL = Object.entries(D);
+const byR = { US:[], EU:[], CA:[], JP:[] };
+ALL.forEach(([n,d]) => { if(byR[d.rg]) byR[d.rg].push([n,d]); });
+
+// Heatmap cell class
+const hmC = v => {
+  if(v == null) return 'hn';
+  if(v >= 10) return 'hg5'; if(v >= 5) return 'hg4'; if(v >= 2) return 'hg3'; if(v >= 0) return 'hg2';
+  if(v > -3) return 'hg1'; if(v > -6) return 'hr1'; if(v > -10) return 'hr2'; if(v > -18) return 'hr3'; if(v > -25) return 'hr4'; return 'hr5';
+};
+
+// Trajectory
+const trajW = (q1, qL) => {
+  if(q1 == null || qL == null) return '—';
+  const d = qL - q1;
+  return d > 5 ? 'Accelerating' : d > 1 ? 'Improving' : d > -1 ? 'Stable' : d > -5 ? 'Softening' : 'Deteriorating';
+};
+const trajC = (q1, qL) => {
+  if(q1 == null || qL == null) return '';
+  const d = qL - q1;
+  return d > 5 ? 'ta' : d > 1 ? 'ti' : d > -1 ? 'ts' : d > -5 ? 'tso' : 'td';
+};
+
+// ─── COVER STATS ────────────────────────────────────────────
+(function(){
+  const full = ALL.filter(([,d]) => d.yoy[4] != null);
+  document.getElementById('mh-w').textContent = full.filter(([,d]) => d.yoy[4] > 0).length;
+  document.getElementById('mh-l').textContent = full.filter(([,d]) => d.yoy[4] <= 0).length;
+})();
+
+// ─── KPI STRIP ──────────────────────────────────────────────
+(function(){
+  const full = ALL.filter(([,d]) => d.yoy[4] != null);
+  const rev = full.reduce((s,[,d]) => s + (d.r25[4] || 0), 0);
+  const best = full.reduce((a,b) => b[1].yoy[4] > a[1].yoy[4] ? b : a);
+  const worst = full.reduce((a,b) => b[1].yoy[4] < a[1].yoy[4] ? b : a);
+  const w = full.filter(([,d]) => d.yoy[4] > 0).length;
+  document.getElementById('kpi-strip').innerHTML = `
+    <div class="kpi-box kpi-g"><div class="kpi-val">$${Math.round(rev)}B</div><div class="kpi-lbl">Combined Revenue</div><div class="kpi-note">Brands with confirmed full-year FY25</div></div>
+    <div class="kpi-box kpi-gr"><div class="kpi-val">${w} / ${full.length}</div><div class="kpi-lbl">Brands in Growth</div><div class="kpi-note">FY25 YoY positive</div></div>
+    <div class="kpi-box kpi-gr"><div class="kpi-val">+${best[1].yoy[4].toFixed(1)}%</div><div class="kpi-lbl">Best Performer FY</div><div class="kpi-note">${best[0]}</div></div>
+    <div class="kpi-box kpi-r"><div class="kpi-val">${worst[1].yoy[4].toFixed(1)}%</div><div class="kpi-lbl">Biggest Decline FY</div><div class="kpi-note">${worst[0]}</div></div>`;
+})();
+
+// ─── REGION KPIs ────────────────────────────────────────────
+function regionKPIs(rg, id) {
+  const list = byR[rg], full = list.filter(([,d]) => d.yoy[4] != null);
+  const rev = full.reduce((s,[,d]) => s + (d.r25[4] || 0), 0);
+  const avg = full.length ? full.reduce((s,[,d]) => s + d.yoy[4], 0) / full.length : null;
+  const best = full.length ? full.reduce((a,b) => b[1].yoy[4] > a[1].yoy[4] ? b : a) : null;
+  const w = full.filter(([,d]) => d.yoy[4] > 0).length;
+  document.getElementById(id).innerHTML = [
+    {v: rev > 0 ? '$'+rev.toFixed(0)+'B' : '—', l:'Combined Revenue'},
+    {v: avg != null ? (avg >= 0 ? '+' : '') + avg.toFixed(1)+'%' : '—', l:'Avg FY YoY'},
+    {v: best ? best[0] : '—', l:'Top Brand'},
+    {v: w+'/'+full.length, l:'Brands Growing'},
+  ].map(k => `<div class="rh-kpi"><div class="rv">${k.v}</div><div class="rl">${k.l}</div></div>`).join('');
+}
+['US','EU','CA','JP'].forEach(rg => regionKPIs(rg, 'rk-'+rg.toLowerCase()));
+
+// ─── HEATMAP ────────────────────────────────────────────────
+function buildHM(id, list) {
+  let h = `<table class="hm-tbl"><thead><tr><th>Brand</th>${QQ.map(q=>`<th>${q}</th>`).join('')}<th>Trajectory</th></tr></thead><tbody>`;
+  list.forEach(([name, d]) => {
+    const ys = d.yoy.slice(0,4);
+    const qL = ys[3] ?? ys[2];
+    const tw = trajW(ys[0], qL), tc = trajC(ys[0], qL);
+    h += `<tr><td>${name}<small>${d.ct}</small></td>`;
+    ys.forEach(v => { h += `<td class="${hmC(v)}">${v != null ? fP(v) : '—'}</td>`; });
+    h += `<td class="htraj ${tc}">${tw}</td></tr>`;
+  });
+  document.getElementById(id).innerHTML = h + '</tbody></table>';
+}
+buildHM('hm-global', [...byR.US, ...byR.EU, ...byR.CA, ...byR.JP]);
+buildHM('hm-us', byR.US);
+buildHM('hm-eu', byR.EU);
+
+// ─── SCORECARD TABLE ────────────────────────────────────────
+function buildSC(id, list) {
+  let h = `<thead><tr><th>Brand</th><th>FY25 Rev</th><th>FY24 Rev</th><th>FY YoY</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Trajectory</th><th>FY25 Income</th><th>Inventory</th><th>Debt FY25</th></tr></thead><tbody>`;
+  list.forEach(([name, d]) => {
+    const y = d.yoy, r = d.r25, r4 = d.r24, inc = d.i25, inv = d.inv, dbt = d.dbt;
+    const qL = y[3] ?? y[2];
+    const tw = trajW(y[0], qL), tc = trajC(y[0], qL);
+    const iSig = inv[1] && inv[2] ? (inv[2] < inv[1] ? '<span class="inv-lean">▼ Lean</span>' : '<span class="inv-bld">▲ Build</span>') : '<span class="vna">—</span>';
+    const dSig = dbt[2] != null ? `<span class="${dbt[2] < (dbt[1] ?? dbt[2]) ? 'vup' : 'vdn'}">$${dbt[2].toFixed(2)}B</span>` : '<span class="vna">—</span>';
+    h += `<tr>
+      <td><strong>${name}</strong><br><small style="color:var(--dim);font-weight:400">${d.ct}</small></td>
+      <td>${r[4] != null ? fB(r[4]) : '<span class="vna">Pending</span>'}</td>
+      <td style="color:var(--dim)">${r4[4] != null ? fB(r4[4]) : '—'}</td>
+      <td class="${vC(y[4])}">${fP(y[4])}</td>
+      <td class="${vC(y[0])}">${fP(y[0])}</td>
+      <td class="${vC(y[1])}">${fP(y[1])}</td>
+      <td class="${vC(y[2])}">${fP(y[2])}</td>
+      <td class="${vC(y[3])}">${fP(y[3])}</td>
+      <td><span class="${tc}" style="font-size:11.5px;font-weight:700">${tw}</span></td>
+      <td class="${vC(inc[4])}">${inc[4] != null ? (inc[4] >= 0 ? '+' : '') + inc[4].toFixed(3) + 'B' : '<span class="vna">—</span>'}</td>
+      <td>${iSig}</td>
+      <td>${dSig}</td>
+    </tr>`;
+  });
+  document.getElementById(id).innerHTML = h + '</tbody>';
+}
+buildSC('t-us', byR.US);
+buildSC('t-eu', byR.EU);
+buildSC('t-ca', byR.CA);
+buildSC('t-jp', byR.JP);
+
+// ─── BALANCE TABLE ──────────────────────────────────────────
+(function(){
+  const all = [...byR.US, ...byR.EU, ...byR.CA, ...byR.JP];
+  let h = `<thead><tr><th>Brand</th><th>Region</th><th>Inv FY23</th><th>Inv FY24</th><th>Inv FY25</th><th>Inv Change</th><th>Debt FY23</th><th>Debt FY24</th><th>Debt FY25</th><th>Debt Change</th></tr></thead><tbody>`;
+  all.forEach(([name, d]) => {
+    const inv = d.inv, dbt = d.dbt;
+    const fv = v => v != null ? '$' + v.toFixed(2) : '—';
+    const id = inv[1] && inv[2] ? inv[2] - inv[1] : null;
+    const dd = dbt[1] && dbt[2] ? dbt[2] - dbt[1] : null;
+    const iS = id != null ? `<span class="${id < 0 ? 'inv-lean' : 'inv-bld'}">${id < 0 ? '▼ –$'+Math.abs(id).toFixed(2)+'B' : '▲ +$'+id.toFixed(2)+'B'}</span>` : '<span class="vna">—</span>';
+    const dS = dd != null ? `<span class="${dd < 0 ? 'vup' : 'vdn'}">${dd < 0 ? '↓ –$'+Math.abs(dd).toFixed(2)+'B' : '↑ +$'+dd.toFixed(2)+'B'}</span>` : '<span class="vna">—</span>';
+    h += `<tr>
+      <td><strong>${name}</strong></td>
+      <td><span class="rg-chip chip-${d.rg}">${d.rg}</span></td>
+      <td>${fv(inv[0])}</td><td>${fv(inv[1])}</td><td><strong>${fv(inv[2])}</strong></td><td>${iS}</td>
+      <td>${fv(dbt[0])}</td><td>${fv(dbt[1])}</td><td><strong>${fv(dbt[2])}</strong></td><td>${dS}</td>
+    </tr>`;
+  });
+  document.getElementById('t-balance').innerHTML = h + '</tbody>';
+})();
+
+// ─── PRODUCT TABLE ──────────────────────────────────────────
+(function(){
+  const REGS = [['US','🇺🇸 United States','#1840A8'],['EU','🇪🇺 Europe','#0F6B45'],['CA','🇨🇦 Canada','#9B3410'],['JP','🇯🇵 Japan','#6B1FAD']];
+  let h = `<thead><tr><th style="width:140px">Brand</th><th style="width:58px">Qtr</th><th>Top Selling Products & Categories</th><th style="width:210px">Primary Headwind</th></tr></thead><tbody>`;
+  REGS.forEach(([rg, label, c]) => {
+    h += `<tr class="rgrow"><td colspan="4" style="color:${c};background:${c}14;border-left:4px solid ${c};letter-spacing:2px">${label}</td></tr>`;
+    byR[rg].filter(([,d]) => d.sold && Object.keys(d.sold).length > 0).forEach(([name, d]) => {
+      h += `<tr class="brow"><td colspan="4">${name} <span style="color:var(--dim);font-weight:400;font-size:11px">· ${d.ct}</span></td></tr>`;
+      QQ.filter(q => d.sold[q]).forEach(q => {
+        const qd = d.sold[q];
+        const drv = (qd.d || []).join(' · ');
+        const hw = (qd.h || [])[0] || '';
+        h += `<tr><td></td><td><span class="qbadge">${q}</span></td><td>${drv}</td><td class="hw">${hw}</td></tr>`;
+      });
+    });
+  });
+  document.getElementById('t-prod').innerHTML = h + '</tbody>';
+})();
+
+// ─── CHARTS ─────────────────────────────────────────────────
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.color = '#8A8FA0';
+Chart.defaults.animation = false; // disable animation for speed
+const GRD = { color: 'rgba(0,0,0,.05)', display: true };
+const TT = pct => ({ callbacks: { label: c => ` ${c.dataset.label}: ${pct ? (c.raw >= 0 ? '+' : '') + Number(c.raw).toFixed(1) + '%' : '$' + Number(c.raw).toFixed(2) + 'B'}` } });
+const BASE_OPTS = { responsive:true, maintainAspectRatio:false };
+const LEGEND = { position:'top', labels:{ color:'#5A6072', boxWidth:10, padding:12, font:{size:11} } };
+const XTICK = { color:'#8A8FA0', font:{size:10}, maxRotation:35, autoSkip:true, maxTicksLimit:14 };
+const YTICK = { color:'#8A8FA0', font:{size:10} };
+
+// Chart registry — lazy render via IntersectionObserver
+const chartQueue = new Map();
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting && chartQueue.has(e.target.id)) {
+      chartQueue.get(e.target.id)();
+      chartQueue.delete(e.target.id);
+      observer.unobserve(e.target);
+    }
+  });
+}, { rootMargin: '120px' });
+
+function lazyChart(id, fn) {
+  const el = document.getElementById(id);
+  if(!el) return;
+  chartQueue.set(id, () => fn(el));
+  observer.observe(el);
+}
+
+function mkBar(id, labels, datasets, opts = {}) {
+  lazyChart(id, el => new Chart(el, {
+    type:'bar', data:{labels,datasets},
+    options: { ...BASE_OPTS,
+      plugins:{ legend:{display:opts.legend!==false,...LEGEND}, tooltip:TT(opts.pct) },
+      scales:{ x:{grid:{display:false},ticks:XTICK}, y:{grid:GRD,ticks:{...YTICK,callback:v=>opts.pct?(v>=0?'+':'')+v+'%':'$'+v+'B'}} },
+      datasets:{ bar:{ maxBarThickness:32 } },
+      ...(opts.extra||{})
+    }
+  }));
+}
+
+function mkLine(id, labels, datasets, opts = {}) {
+  lazyChart(id, el => new Chart(el, {
+    type:'line', data:{labels,datasets},
+    options: { ...BASE_OPTS,
+      plugins:{ legend:{display:true,...LEGEND}, tooltip:TT(opts.pct) },
+      scales:{ x:{grid:{display:false},ticks:XTICK}, y:{grid:GRD,ticks:{...YTICK,callback:v=>opts.pct?(v>=0?'+':'')+v+'%':'$'+v+'B'}} },
+      datasets:{ bar:{ maxBarThickness:32 } },
+      elements:{ line:{tension:.3,borderWidth:2}, point:{radius:3,hoverRadius:5} }
+    }
+  }));
+}
+
+// Top 12
+const top12 = ALL.filter(([n,d]) => n !== 'Walmart' && d.r25[4] != null).sort((a,b) => b[1].r25[4] - a[1].r25[4]).slice(0,12);
+const rgCol = { US:'#1840A8CC', EU:'#0F6B45CC', CA:'#9B3410CC', JP:'#6B1FADCC' };
+mkBar('c-top12', top12.map(([n]) => n), [{ label:'FY25 Revenue ($B)', data: top12.map(([,d]) => d.r25[4]), backgroundColor: top12.map(([,d]) => rgCol[d.rg]), borderRadius:4, borderSkipped:false }], { legend:false });
+
+// YoY all
+const yoyAll = ALL.filter(([,d]) => d.yoy[4] != null).sort((a,b) => b[1].yoy[4] - a[1].yoy[4]);
+mkBar('c-yoy-all', yoyAll.map(([n]) => n), [{ label:'FY YoY %', data: yoyAll.map(([,d]) => d.yoy[4]), backgroundColor: yoyAll.map(([,d]) => d.yoy[4] >= 0 ? '#0B6B3CCC' : '#C0181ECC'), borderRadius:3, borderSkipped:false }], { pct:true, legend:false });
+
+// Rev vs Income
+const bi = ALL.filter(([n,d]) => d.r25[4] != null && d.i25[4] != null && d.r25[4] < 25).sort((a,b) => b[1].r25[4] - a[1].r25[4]);
+lazyChart('c-rev-vs-inc', el => new Chart(el, {
+  type: 'bar',
+  data: { labels: bi.map(([n]) => n), datasets: [
+    { label:'FY25 Revenue', data: bi.map(([,d]) => d.r25[4]), backgroundColor:'#1840A833', borderColor:'#1840A8', borderWidth:1, borderRadius:3, yAxisID:'y' },
+    { label:'FY24 Revenue', data: bi.map(([,d]) => d.r24[4]), backgroundColor:'#8A8FA022', borderColor:'#D4D8E3', borderWidth:1, borderRadius:3, yAxisID:'y' },
+    { type:'line', label:'Net Income FY25', data: bi.map(([,d]) => d.i25[4]), borderColor:'#B07D1A', backgroundColor:'transparent', borderWidth:2.5, pointRadius:4, pointBackgroundColor:'#B07D1A', yAxisID:'y2' }
+  ]},
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ position:'top', labels:{ color:'#5A6072', boxWidth:10, padding:14, font:{size:11} } }, tooltip:{ callbacks:{ label: c => ` ${c.dataset.label}: $${Number(c.raw).toFixed(2)}B` } } },
+    scales: {
+      x: { grid:{display:false}, ticks:{color:'#8A8FA0', font:{size:10}} },
+      y: { position:'left', grid:GRD, ticks:{color:'#8A8FA0', font:{size:10}, callback:v=>'$'+v+'B'} },
+      y2: { position:'right', grid:{display:false}, ticks:{color:'#B07D1A', font:{size:10}, callback:v=>'$'+v+'B'} }
+    }
+  }
+}));
+
+// US Scatter
+const usPts = byR.US.filter(([,d]) => d.yoy[0] != null).map(([n,d]) => ({ x:d.yoy[0], y:d.yoy[3] ?? d.yoy[2] ?? 0, label:n }));
+lazyChart('c-us-scatter', el => new Chart(el, {
+  type:'scatter',
+  data: { datasets:[{ label:'Brands', data:usPts, backgroundColor:'#1840A855', borderColor:'#1840A8', borderWidth:1.5, pointRadius:6, pointHoverRadius:8 }] },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.raw.label}: Q1 ${c.raw.x >= 0 ? '+' : ''}${c.raw.x.toFixed(1)}% → Q4 ${c.raw.y >= 0 ? '+' : ''}${c.raw.y.toFixed(1)}%` } } },
+    scales: {
+      x: { title:{ display:true, text:'Q1 YoY %', color:'#8A8FA0', font:{size:11} }, grid:GRD, ticks:{ color:'#8A8FA0', callback:v=>v+'%' } },
+      y: { title:{ display:true, text:'Q4 / Q3 YoY %', color:'#8A8FA0', font:{size:11} }, grid:GRD, ticks:{ color:'#8A8FA0', callback:v=>v+'%' } }
+    }
+  }
+}));
+
+// Nike / RL / VS
+const nk=D['Nike'], rl=D['Ralph Lauren'], vs=D["Victoria's Secret"];
+mkBar('c-nike', QQ, [{ label:'FY24', data:nk.r24.slice(0,4), backgroundColor:'#D4D8E355', borderRadius:3 }, { label:'FY25', data:nk.r25.slice(0,4), backgroundColor:'#C0181EBB', borderRadius:3 }]);
+mkBar('c-rl', QQ, [{ label:'FY24', data:rl.r24.slice(0,4), backgroundColor:'#D4D8E355', borderRadius:3 }, { label:'FY25', data:rl.r25.slice(0,4), backgroundColor:'#1840A8BB', borderRadius:3 }]);
+mkBar('c-vs', QQ, [{ label:'FY24', data:vs.r24.slice(0,4), backgroundColor:'#D4D8E355', borderRadius:3 }, { label:'FY25', data:vs.r25.slice(0,4), backgroundColor:'#9B3410BB', borderRadius:3 }]);
+
+// US Income
+const usInc = byR.US.filter(([,d]) => d.i25[4] != null).sort((a,b) => b[1].i25[4] - a[1].i25[4]);
+mkBar('c-us-inc', usInc.map(([n]) => n), [{ label:'Net Income ($B)', data:usInc.map(([,d]) => d.i25[4]), backgroundColor:usInc.map(([,d]) => d.i25[4] >= 0 ? '#0B6B3CBB' : '#C0181EBB'), borderRadius:3, borderSkipped:false }], { legend:false });
+
+// EU Revenue lines
+const euC = ['#0F6B45','#1840A8','#B07D1A','#6B1FAD','#C0181E'];
+mkLine('c-eu-rev', QQ, byR.EU.map(([n,d],i) => ({ label:n, data:d.r25.slice(0,4), borderColor:euC[i], backgroundColor:'transparent', pointBackgroundColor:euC[i] })));
+
+// EU Income
+const euList = byR.EU;
+mkBar('c-eu-inc', euList.map(([n]) => n), [
+  { label:'FY24 Income (est.)', data:euList.map(([,d]) => { const s=d.i25.slice(0,4).filter(v=>v!=null).reduce((a,b)=>a+b,0); return s || null; }), backgroundColor:'#D4D8E355', borderRadius:3 },
+  { label:'FY25 Annual', data:euList.map(([,d]) => d.i25[4]), backgroundColor:euList.map(([,d]) => d.i25[4] != null ? (d.i25[4] >= 0 ? '#0F6B45BB' : '#C0181EBB') : '#D4D8E355'), borderRadius:3 }
+]);
+
+// CA
+const ar=D['Aritzia'], lu=D['Lululemon'];
+mkBar('c-ca-rev', QQ, [
+  { label:'Aritzia FY24', data:ar.r24.slice(0,4), backgroundColor:'#9B341033', borderRadius:3 },
+  { label:'Aritzia FY25', data:ar.r25.slice(0,4), backgroundColor:'#9B3410BB', borderRadius:3 },
+  { label:'Lululemon FY24', data:lu.r24.slice(0,4), backgroundColor:'#6B1FAD33', borderRadius:3 },
+  { label:'Lululemon FY25', data:lu.r25.slice(0,4), backgroundColor:'#6B1FADBB', borderRadius:3 }
+]);
+mkLine('c-ca-traj', ['Q1','Q2','Q3'], [
+  { label:'Aritzia YoY %', data:ar.yoy.slice(0,3), borderColor:'#9B3410', backgroundColor:'#9B341015', fill:true, pointBackgroundColor:'#9B3410' },
+  { label:'Lululemon YoY %', data:lu.yoy.slice(0,3), borderColor:'#6B1FAD', backgroundColor:'#6B1FAD15', fill:true, pointBackgroundColor:'#6B1FAD' }
+], { pct:true });
+
+// JP Combo
+const fr = D['Fast Retailing'];
+lazyChart('c-jp-combo', el => new Chart(el, {
+  type:'bar',
+  data: { labels:QQ, datasets:[
+    { label:'Revenue ($B)', data:fr.r25.slice(0,4), backgroundColor:'#6B1FAD99', borderRadius:4, yAxisID:'y' },
+    { type:'line', label:'Net Income ($B)', data:fr.i25.slice(0,4), borderColor:'#B07D1A', borderWidth:2.5, pointRadius:5, pointBackgroundColor:'#B07D1A', backgroundColor:'transparent', yAxisID:'y2' }
+  ]},
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{ position:'top', labels:{ color:'#5A6072', boxWidth:10, padding:14, font:{size:11} } } },
+    scales: { x:{grid:{display:false},ticks:{color:'#8A8FA0'}}, y:{position:'left',grid:GRD,ticks:{color:'#8A8FA0',callback:v=>'$'+v+'B'}}, y2:{position:'right',grid:{display:false},ticks:{color:'#B07D1A',callback:v=>'$'+v+'B'}} }
+  }
+}));
+mkBar('c-jp-yoy', QQ, [{ label:'YoY %', data:fr.yoy.slice(0,4), backgroundColor:fr.yoy.slice(0,4).map(v => v != null ? (v >= 0 ? '#6B1FAD99' : '#C0181E99') : '#D4D8E355'), borderRadius:4, borderSkipped:false }], { pct:true, legend:false });
+
+// Inventory delta
+const invD = ALL.filter(([,d]) => d.inv[1] != null && d.inv[2] != null).map(([n,d]) => ({ n, v: +(d.inv[2]-d.inv[1]).toFixed(2) })).filter(x => Math.abs(x.v) >= 0.01).sort((a,b) => a.v - b.v);
+lazyChart('c-inv-delta', el => new Chart(el, {
+  type:'bar',
+  data: { labels:invD.map(x=>x.n), datasets:[{ label:'Inv Change ($B)', data:invD.map(x=>x.v), backgroundColor:invD.map(x=>x.v<0?'#0B6B3CBB':'#C0181EBB'), borderRadius:3, borderSkipped:false }] },
+  options: {
+    indexAxis:'y', responsive:true, maintainAspectRatio:false,
+    plugins: { legend:{display:false}, tooltip:{ callbacks:{ label: c => ` ${c.raw < 0 ? 'Reduced' : 'Built'} $${Math.abs(c.raw).toFixed(2)}B` } } },
+    scales: { y:{grid:{display:false},ticks:{color:'#8A8FA0',font:{size:10.5}}}, x:{grid:GRD,ticks:{color:'#8A8FA0',callback:v=>(v>=0?'+$':'–$')+Math.abs(v)+'B'}} }
+  }
+}));
+
+// Debt 3yr
+const dbtBrands = ['Nike','VF Corp',"Macy's",'PVH Corp','Adidas',"Kohl's",'Ralph Lauren','Gap Inc','Under Armour'];
+const dL = dbtBrands.map(n => [n, D[n]]).filter(([,d]) => d && d.dbt[2] != null);
+mkBar('c-debt-3yr', dL.map(([n]) => n), [
+  { label:'FY23', data:dL.map(([,d]) => d.dbt[0]), backgroundColor:'#D4D8E366', borderRadius:3 },
+  { label:'FY24', data:dL.map(([,d]) => d.dbt[1]), backgroundColor:'#8A8FA066', borderRadius:3 },
+  { label:'FY25', data:dL.map(([,d]) => d.dbt[2]), backgroundColor:'#1840A8BB', borderRadius:3 }
+], { extra:{ barThickness:14 } });
+
+// ─── NAV ACTIVE STATE ────────────────────────────────────────
+const secIds = ['overview','heatmap','us','eu','ca','jp','balance','products'];
+window.addEventListener('scroll', () => {
+  const y = window.scrollY + 90;
+  secIds.forEach(id => {
+    const el = document.getElementById(id);
+    const a = document.querySelector(`.rail-link[href="#${id}"]`);
+    if(!el || !a) return;
+    const top = el.offsetTop, bot = top + el.offsetHeight;
+    a.classList.toggle('on', y >= top && y < bot);
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
